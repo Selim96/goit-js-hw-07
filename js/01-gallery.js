@@ -20,16 +20,18 @@ gallery.insertAdjacentHTML("beforeend", markup);
 gallery.addEventListener("click", (event) => {
   event.preventDefault();
   const original = event.target;
-  
+
+  if (original === gallery) {
+    return;
+  };
+
   const instance = basicLightbox.create(`
     <img      
       src="${original.dataset.source}"      
       alt="${original.alt}"
     />
 `);
-  instance.show();
-  
-  
+  instance.show(); 
   gallery.addEventListener("keydown", event => {
     if (event.code === "Escape") {
       instance.close(() => console.log('lightbox not visible anymore'));
