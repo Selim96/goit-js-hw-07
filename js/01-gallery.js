@@ -16,13 +16,26 @@ const markup = galleryItems.map((item) => `<div class="gallery__item">
   </a>
 </div>`).join("");
 gallery.insertAdjacentHTML("beforeend", markup);
-console.log(gallery);
 
-const picture = document.querySelector("")
-gallery.addEventListener("click", getoriginal);
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
+  const original = event.target;
+  
+  const instance = basicLightbox.create(`
+    <img      
+      src="${original.dataset.source}"      
+      alt="${original.alt}"
+    />
+`);
+  instance.show();
+  
+  
+  gallery.addEventListener("keydown", event => {
+    if (event.code === "Escape") {
+      instance.close(() => console.log('lightbox not visible anymore'));
+      return;
+    };
+  });
+});
 
-function getoriginal(event) {
-    const original = event.target;
-    return original;
-}
 
