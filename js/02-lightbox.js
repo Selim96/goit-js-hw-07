@@ -10,20 +10,4 @@ const markup = galleryItems.map((item) => `<a class="gallery__item" href="${item
 </a>`).join("");
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  const original = event.target;
-
-  if (original === gallery) {
-    return;
-  };
-  const lightbox = new SimpleLightbox('.gallery a', {'captionsData': 'alt', 'captionPosition': 'bottom', 'captionDelay': 250});
-    lightbox.open;
-  
-  gallery.addEventListener("keydown", event => {
-    if (event.code === "Escape") {
-      lightbox.close;
-      return;
-    };
-  });
-});
+const lightbox = new SimpleLightbox('.gallery a', {'captionsData': 'alt', 'captionPosition': 'bottom', 'captionDelay': 250});
